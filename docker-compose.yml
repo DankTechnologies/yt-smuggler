@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  yt-smuggler:
+    build: .
+    environment:
+      - API_KEY=${API_KEY}
+      - PLAYLIST_ID=${PLAYLIST_ID}
+      - DOWNLOAD_DIR=/downloads
+    volumes:
+      - /mnt/user/downloads/youtube:/downloads
+    restart: unless-stopped
