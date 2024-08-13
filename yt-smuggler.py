@@ -85,10 +85,10 @@ def download_videos(service, video_urls):
         channel_name, video_title, video_description, video_date = get_video_details(service, video_id)
 
         if channel_name and video_title:
-            channel_name_sanitized = ''.join(c if c.isalnum() or c in ' _-' else '_' for c in channel_name)
-            video_title_sanitized = ''.join(c if c.isalnum() or c in ' _-' else '_' for c in video_title)
+            channel_name_sanitized = ''.join(c if c.isalnum() or c in ' _-' else '_' for c in channel_name).strip(' _-')
+            video_title_sanitized = ''.join(c if c.isalnum() or c in ' _-' else '_' for c in video_title).strip(' _-')
             output_template = os.path.join(DOWNLOAD_DIR, f"{channel_name_sanitized}/{video_title_sanitized}.%(ext)s")
-            nfo_template = os.path.join(DOWNLOAD_DIR, f"{channel_name_sanitized}/{video_title_sanitized}.nfo")
+            nfo_template = os.path.join(DOWNLOAD_DIR, f"{channel_name_sanitized}/{video_title_sanitized}.nfo") 
         else:
             output_template = os.path.join(DOWNLOAD_DIR, f"{video_id}.%(ext)s")
             nfo_template = os.path.join(DOWNLOAD_DIR, f"{video_id}.nfo")
