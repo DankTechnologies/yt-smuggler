@@ -99,6 +99,7 @@ def download_videos(service, video_urls):
             'noplaylist': True,
             'quiet': True,
             'no_warnings': True,
+            'merge_output_format': 'mp4',
             'postprocessors': [{
                 'key': 'FFmpegVideoRemuxer',
                 'preferedformat': 'mp4',
