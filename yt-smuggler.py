@@ -88,22 +88,17 @@ def download_videos(service, video_urls):
             channel_name_sanitized = ''.join(c if c.isalnum() or c in ' _-' else '_' for c in channel_name).strip(' _-')
             video_title_sanitized = ''.join(c if c.isalnum() or c in ' _-' else '_' for c in video_title).strip(' _-')
             output_template = os.path.join(DOWNLOAD_DIR, f"{channel_name_sanitized}/{video_title_sanitized}.%(ext)s")
-            nfo_template = os.path.join(DOWNLOAD_DIR, f"{channel_name_sanitized}/{video_title_sanitized}.nfo") 
+            nfo_template = os.path.join(DOWNLOAD_DIR, f"{channel_name_sanitized}/{video_title_sanitized}.nfo")
         else:
             output_template = os.path.join(DOWNLOAD_DIR, f"{video_id}.%(ext)s")
             nfo_template = os.path.join(DOWNLOAD_DIR, f"{video_id}.nfo")
 
         ydl_opts = {
             'outtmpl': output_template,
-            'format': 'bestvideo[height<=1080]+bestaudio/best[height<=1080]',
+            'format': 'best[ext=mp4]',
             'noplaylist': True,
             'quiet': True,
             'no_warnings': True,
-            'merge_output_format': 'mp4',
-            'postprocessors': [{
-                'key': 'FFmpegVideoRemuxer',
-                'preferedformat': 'mp4',
-            }],
         }
 
         try:
