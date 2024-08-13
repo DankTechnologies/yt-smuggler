@@ -95,10 +95,14 @@ def download_videos(service, video_urls):
 
         ydl_opts = {
             'outtmpl': output_template,
-            'format': 'bestvideo+bestaudio/best',
+            'format': 'bestvideo[height<=1080]+bestaudio/best[height<=1080]',
             'noplaylist': True,
             'quiet': True,
             'no_warnings': True,
+            'postprocessors': [{
+                'key': 'FFmpegVideoRemuxer',
+                'preferedformat': 'mp4',
+            }],
         }
 
         try:
